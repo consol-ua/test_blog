@@ -1,10 +1,9 @@
 import Head from "next/head";
 import NavMenu from "../components/NavMenu";
 import styles from "../styles/Lastpost.module.css";
-import { useRouter } from 'next/router'
 
 
-export default function Home() {
+export default function LastPost() {
 
   return (
     <>
