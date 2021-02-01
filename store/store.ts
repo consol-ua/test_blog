@@ -1,32 +1,34 @@
 import { useMemo } from 'react'
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
+import reducers from './reducers'
 
+let store
 
-type InitialStateType = {
-  lastPostId: number
-  allPosts: Array<PostType>
-  currentPagePath: string
-  newPostTitle: string | null
-  newPostBody: string | null
-  isLoaded: boolean
+function initStore(initialState) {
+  return createStore(
+    reducers,
+    initialState,
+    applyMiddleware(thunkMiddleware)
+  )
 }
 
-const initialState: InitialStateType = {
-,
-  currentPagePath: '',
-  newPostBody: null,
-  newPostTitle: null,
-  isLoaded: false
-}
-
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case value:
-
-      break;
-
-    default:
-      return state;
+export const initializeStore = (preloadedState) => {
+  let _store = store ?? initStore(preloadedState)
+  if (preloadedState && store) {
+    _store = initStore({
+      ...store.getState(),
+      ...preloadedState,
+    })
+    store = undefined
   }
+  if (typeof window === 'undefined') return _store
+  if (!store) store = _store
+
+  return _store
+}
+
+export function useStore(initialState) {
+  const store = useMemo(() => initializeStore(initialState), [initialState])
+  return store
 }

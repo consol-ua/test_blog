@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { ADD_BODY_COMMENT, ADD_TITLE_COMMENT } from './type'
 
 type CommentType = {
   id: number
@@ -10,7 +11,9 @@ type PostType = {
   postTitle: string
   postBody: string
   comments?: Array<CommentType>
-  defaultImg: string
+  newTitleComment?: string
+  newBodyComment?: string
+
 }
 
 // POST STATE
@@ -25,14 +28,17 @@ const initialPostState: PostType = {
       body: ''
     }
   ],
-  defaultImg: 'https://neilpatel.com/wp-content/uploads/2018/10/blog.jpg'
+  newBodyComment: '',
+  newTitleComment: ''
 }
 
 // LAST POST REDUCER
 const postReducer = (state = initialPostState, action): PostType => {
-  switch (type) {
-    case types.INCREMENT:
-      return state
+  switch (action.type) {
+    case ADD_TITLE_COMMENT:
+      return { ...state, newTitleComment: action.titleComment }
+    case ADD_BODY_COMMENT:
+      return { ...state, newBodyComment: action.bodyComment }
     default:
       return state
   }
@@ -55,9 +61,8 @@ const initialAllPostsState: AllPostsType = {
 
 // ALL POSTS REDUCER
 const allPostsReducer = (state = initialAllPostsState, action): AllPostsType => {
-  switch (type) {
-    case types.TICK:
-      return state
+  switch (action.type) {
+
     default:
       return state
   }
@@ -72,9 +77,8 @@ const initialCreatePostState = {
 type CreatePostType = typeof initialCreatePostState
 // CREATE POST REDUCER
 const createPostReducer = (state = initialCreatePostState, action): CreatePostType => {
-  switch (type) {
-    case types.TICK:
-      return state
+  switch (action.type) {
+
     default:
       return state
   }
