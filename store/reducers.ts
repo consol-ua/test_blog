@@ -1,11 +1,5 @@
 import { combineReducers } from "redux";
-import {
-  ADD_BODY_COMMENT,
-  ADD_TITLE_COMMENT,
-  ADD_TITLE_POST,
-  ADD_BODY_POST,
-  SEND_POST
-} from "./type";
+import * as type from "./type";
 
 type CommentType = {
   id: number;
@@ -40,10 +34,10 @@ const initialPostState: PostType = {
 // POST REDUCER
 const postReducer = (state = initialPostState, action): PostType => {
   switch (action.type) {
-    case ADD_TITLE_COMMENT:
-      return { ...state, newTitleComment: action.titleComment };
-    case ADD_BODY_COMMENT:
-      return { ...state, newBodyComment: action.bodyComment };
+    // case type.ADD_TITLE_COMMENT:
+    //   return { ...state, newTitleComment: action.titleComment };
+    // case type.ADD_BODY_COMMENT:
+    //   return { ...state, newBodyComment: action.bodyComment };
     default:
       return state;
   }
@@ -51,6 +45,7 @@ const postReducer = (state = initialPostState, action): PostType => {
 
 type AllPostsType = {
   allPosts: Array<PostType>;
+  isLoaded: boolean;
 };
 
 // ALL POSTS STATE
@@ -61,7 +56,8 @@ const initialAllPostsState: AllPostsType = {
       postTitle: "",
       postBody: ""
     }
-  ]
+  ],
+  isLoaded: false
 };
 
 // ALL POSTS REDUCER
@@ -70,6 +66,16 @@ const allPostsReducer = (
   action
 ): AllPostsType => {
   switch (action.type) {
+    case type.SET_POST:
+      return {
+        ...state,
+        allPosts: [...action.posts]
+      };
+    case type.SET_POST_LOADED:
+      return {
+        ...state,
+        isLoaded: action.isLoaded
+      };
     default:
       return state;
   }
@@ -88,11 +94,11 @@ const createPostReducer = (
   action
 ): CreatePostType => {
   switch (action.type) {
-    case ADD_TITLE_POST:
+    case type.ADD_TITLE_POST:
       return { ...state, title: action.titlePost };
-    case ADD_BODY_POST:
+    case type.ADD_BODY_POST:
       return { ...state, body: action.bodyPost };
-    case SEND_POST:
+    case type.SEND_POST:
       return { ...state, body: "", title: "" };
     default:
       return state;
