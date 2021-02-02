@@ -1,40 +1,61 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Head from "next/head";
-import styles from "../styles/Lastpost.module.css";
 import LayOutApp from "../../../components/LayOutApp";
-import { addTitlePost } from "../../../store/actions";
+import { addTitlePost, addBodyPost, sendPost } from "../../../store/actions";
 
-export default function Home() {
+export default function NewPost() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.createPost);
   let onChangeTitle = (event) => {
     let value = event.target.value;
     dispatch(addTitlePost(value));
-    console.log(state);
+  };
+  let onChangeBody = (event) => {
+    let value = event.target.value;
+    dispatch(addBodyPost(value));
+  };
+  let onClickSend = () => {
+    dispatch(sendPost());
   };
   return (
     <LayOutApp>
-      <div>
+      <div className="container">
         <div className="title">
           <h3>Title</h3>
           <textarea
             cols={30}
             rows={1}
             onChange={(e) => onChangeTitle(e)}
-            value="test"
+            value={state.title ?? ""}
           />
         </div>
-        <div className="Bodi">
-          <h4>Body</h4>
+        <div className="Body">
+          <h3>Body</h3>
           <textarea
             cols={30}
             rows={10}
-            onChange={(e) => console.log(e.target.value)}
-          ></textarea>
+            onChange={(e) => onChangeBody(e)}
+            value={state.body ?? ""}
+          />
         </div>
-        <button>Send post</button>
+        <button onClick={() => onClickSend()}>Send post</button>
       </div>
+      <style jsx>{`
+        .container {
+          margin: 20px;
+        }
+        h3 {
+          margin-bottom: 0;
+        }
+        button {
+          padding: 20px;
+        }
+        textarea {
+          width: 100%;
+          resize: none;
+        }
+      `}</style>
     </LayOutApp>
   );
 }

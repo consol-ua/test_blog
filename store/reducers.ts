@@ -3,7 +3,8 @@ import {
   ADD_BODY_COMMENT,
   ADD_TITLE_COMMENT,
   ADD_TITLE_POST,
-  ADD_BODY_POST
+  ADD_BODY_POST,
+  SEND_POST
 } from "./type";
 
 type CommentType = {
@@ -76,8 +77,8 @@ const allPostsReducer = (
 
 // CREATE POST STATE
 const initialCreatePostState = {
-  title: "",
-  body: ""
+  title: "Test title",
+  body: "Test Body"
 };
 
 type CreatePostType = typeof initialCreatePostState;
@@ -88,9 +89,11 @@ const createPostReducer = (
 ): CreatePostType => {
   switch (action.type) {
     case ADD_TITLE_POST:
-      return { ...state, newTitleComment: action.titlePost };
+      return { ...state, title: action.titlePost };
     case ADD_BODY_POST:
-      return { ...state, newBodyComment: action.bodyPost };
+      return { ...state, body: action.bodyPost };
+    case SEND_POST:
+      return { ...state, body: "", title: "" };
     default:
       return state;
   }
