@@ -8,10 +8,10 @@ function LayOutApp({ children }) {
         <Link href={"/"}>
           <a className={s.active}>Last Post</a>
         </Link>
-        <Link href={"/1"}>
+        <Link href={"/posts"}>
           <a>All Post</a>
         </Link>
-        <Link href={"/2"}>
+        <Link href={"/posts/new"}>
           <a>Create Post</a>
         </Link>
       </div>

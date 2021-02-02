@@ -1,5 +1,10 @@
 import { combineReducers } from "redux";
-import { ADD_BODY_COMMENT, ADD_TITLE_COMMENT } from "./type";
+import {
+  ADD_BODY_COMMENT,
+  ADD_TITLE_COMMENT,
+  ADD_TITLE_POST,
+  ADD_BODY_POST
+} from "./type";
 
 type CommentType = {
   id: number;
@@ -31,7 +36,7 @@ const initialPostState: PostType = {
   newTitleComment: ""
 };
 
-// LAST POST REDUCER
+// POST REDUCER
 const postReducer = (state = initialPostState, action): PostType => {
   switch (action.type) {
     case ADD_TITLE_COMMENT:
@@ -82,6 +87,10 @@ const createPostReducer = (
   action
 ): CreatePostType => {
   switch (action.type) {
+    case ADD_TITLE_POST:
+      return { ...state, newTitleComment: action.titlePost };
+    case ADD_BODY_POST:
+      return { ...state, newBodyComment: action.bodyPost };
     default:
       return state;
   }
