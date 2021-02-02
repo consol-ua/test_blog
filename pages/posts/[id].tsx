@@ -1,8 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import LayOutApp from "../components/LayOutApp";
-import styles from "../styles/Lastpost.module.css";
+import LayOutApp from "../../components/LayOutApp";
 
 const codeStyle = {
   background: "#ebebeb",
@@ -12,12 +11,6 @@ const codeStyle = {
   marginBottom: 10
 };
 export default function Home() {
-  // return (
-  //   <>
-  //     <NavMenu />
-  //     <h1>Test link 2</h1>
-  //   </>
-  // );
   const state = useSelector((state) => state);
 
   return (
