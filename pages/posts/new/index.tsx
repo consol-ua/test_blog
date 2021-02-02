@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Head from "next/head";
 import styles from "../styles/Lastpost.module.css";
 import LayOutApp from "../../../components/LayOutApp";
-import { addBodyComment } from "../../../store/actions";
+import { addTitlePost } from "../../../store/actions";
 
 export default function Home() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.createPost);
   let onChangeTitle = (event) => {
     let value = event.target.value;
-    dispatch(addBodyComment(value));
+    dispatch(addTitlePost(value));
     console.log(state);
   };
   return (
