@@ -1,12 +1,13 @@
 import Head from "next/head";
-import NavMenu from "../components/NavMenu";
 import styles from "../styles/Lastpost.module.css";
+import LayOutApp from "../components/LayOutApp"
 
 export default function Home() {
   return (
-    <>
-      <NavMenu />
+
+      <LayOutApp>
       <h1>Test link</h1>
-    </>
+      <LayOutApp/>
+
   );
 }

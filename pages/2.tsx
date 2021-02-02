@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import NavMenu from "../components/NavMenu";
+import LayOutApp from "../components/LayOutApp";
 import styles from "../styles/Lastpost.module.css";
 
 
@@ -22,13 +22,13 @@ export default function Home() {
   const state = useSelector((state) => state)
 
   return (
-    <>
+    <LayOutApp>
       <pre style={codeStyle}>
         <code>{JSON.stringify(state, null, 4)}</code>
       </pre>
       <Link href="/">
         <a>Go Back Home</a>
       </Link>
-    </>
+    <LayOutApp/>
   )
 }
