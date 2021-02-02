@@ -79,7 +79,8 @@ const allPostsReducer = (
 // CREATE POST STATE
 const initialCreatePostState = {
   title: "Test title",
-  body: "Test Body"
+  body: "Test Body",
+  isPosted: false
 };
 
 type CreatePostType = typeof initialCreatePostState;

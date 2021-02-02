@@ -7,19 +7,25 @@ import styles from "../styles/post.module.css";
 import { setPost } from "../store/actions";
 import { GlobalStateType } from "../store/reducers";
 import { Post } from "../components/Post";
+import Preloader from "../components/preloder/Preloader";
 
 function AllPosts({ posts }) {
   const dispatch = useDispatch();
-  const stateComponent = useSelector((state: GlobalStateType) => state.allPost.allPosts);
-  let allPosts = posts ?? stateComponent;
-  if (!allPosts.length) {
+  const stateComponent = useSelector((state: GlobalStateType) => state.allPost);
+  let allPosts = posts ?? stateComponent.allPosts;
+  if (!allPosts.length && !stateComponent.isLoaded) {
     dispatch(setPost());
   }
   useEffect(() => {
-    if (!posts) {
+    if (!posts && !stateComponent.isLoaded) {
       dispatch(setPost());
     }
   }, [dispatch])
+  console.log(stateComponent.isLoaded)
+  if (stateComponent.isLoaded) {
+    console.log('preloder')
+    return <LayOutApp><Preloader /></LayOutApp>
+  }
   return (
     <LayOutApp>
       {
