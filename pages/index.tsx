@@ -1,26 +1,29 @@
 import Head from "next/head";
-import { useEffect, useSelector, useDispatch } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import LayOutApp from "../components/LayOutApp";
 import styles from "../styles/post.module.css";
-import setPost from "../store/actions";
+import { setPost } from "../store/actions";
 
-export default function Post() {
-  const state = useSelector((state) => state);
+function AllPosts({ posts }) {
+  const state = useSelector((state) => state.creactePost);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setPost());
-  });
+  // useEffect(() => {
+  //   dispatch(setPost());
+  // });
+  // console.log(state);
   console.log(state);
+  let allPosts = posts ? posts : state;
   return (
     <LayOutApp>
-      <h1>Hello world</h1>
+      <h1>test{JSON.stringify(allPosts)}</h1>
     </LayOutApp>
   );
 }
 
-// Post.getInitialProps = async (ctx) => {
-//   if (typeof window === "undefined") {
-//     setPost();
-//   }
-//   return { lastPostId:  };
-// };
+export async function getStaticProps(ctx) {
+  let resons = await axios.get("https://simple-blog-api.crew.red/posts/");
+  return { props: { posts: resons.data } };
+}
+export default AllPosts;

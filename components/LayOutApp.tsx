@@ -5,10 +5,10 @@ function LayOutApp({ children }) {
   return (
     <div className={s.container}>
       <div className={s.navigation}>
-        <Link href={"/"}>
+        <Link href={"/posts"}>
           <a className={s.active}>Last Post</a>
         </Link>
-        <Link href={"/posts"}>
+        <Link href={"/"}>
           <a>All Post</a>
         </Link>
         <Link href={"/posts/new"}>
