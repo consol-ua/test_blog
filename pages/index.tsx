@@ -5,25 +5,41 @@ import axios from "axios";
 import LayOutApp from "../components/LayOutApp";
 import styles from "../styles/post.module.css";
 import { setPost } from "../store/actions";
+import { GlobalStateType } from "../store/reducers";
+import { Post } from "../components/Post";
 
 function AllPosts({ posts }) {
-  const state = useSelector((state) => state.creactePost);
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(setPost());
-  // });
-  // console.log(state);
-  console.log(state);
-  let allPosts = posts ? posts : state;
+  const stateComponent = useSelector((state: GlobalStateType) => state.allPost.allPosts);
+  let allPosts = posts ?? stateComponent;
+  if (!allPosts.length) {
+    dispatch(setPost());
+  }
+  useEffect(() => {
+    if (!posts) {
+      dispatch(setPost());
+    }
+  }, [dispatch])
   return (
     <LayOutApp>
-      <h1>test{JSON.stringify(allPosts)}</h1>
+      {
+        allPosts.map((el) => {
+          return <Post key={el.id}
+            id={el.id}
+            title={!el.title ? 'net title' : el.title}
+            body={!el.body ? 'net body' : el.body} />
+        })
+      }
     </LayOutApp>
   );
 }
 
-export async function getStaticProps(ctx) {
+AllPosts.getInitialProps = async (ctx) => {
+  if (!ctx.req) {
+    return { posts: null }
+  }
   let resons = await axios.get("https://simple-blog-api.crew.red/posts/");
-  return { props: { posts: resons.data } };
+  return { posts: resons.data.reverse() }
 }
+
 export default AllPosts;

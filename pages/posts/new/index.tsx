@@ -3,11 +3,12 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import LayOutApp from "../../../components/LayOutApp";
 import { addTitlePost, addBodyPost, sendPost } from "../../../store/actions";
+import { GlobalStateType } from "../../../store/reducers";
 
 export default function NewPost() {
   let router = useRouter();
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.createPost);
+  const state = useSelector((state: GlobalStateType) => state.createPost);
   let onChangeTitle = (event) => {
     let value = event.target.value;
     dispatch(addTitlePost(value));

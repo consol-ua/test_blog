@@ -45,12 +45,12 @@ export const isLoadedPos = (isLoaded) => ({
   isLoaded
 });
 export const setPost = () => (dispatch) => {
-  isLoadedPos(true);
+  // isLoadedPos(true);
   axios
     .get("https://simple-blog-api.crew.red/posts/")
     .then((res) => {
       dispatch({ type: type.SET_POST, posts: res.data });
-      isLoadedPos(false);
+      // isLoadedPos(false);
     })
     .catch((error) => {
       console.log("ERROR SET POST API");

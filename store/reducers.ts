@@ -7,9 +7,9 @@ type CommentType = {
   body: string;
 };
 type PostType = {
-  postId: number;
-  postTitle: string;
-  postBody: string;
+  id: number;
+  title: string;
+  body: string;
   comments?: Array<CommentType>;
   newTitleComment?: string;
   newBodyComment?: string;
@@ -17,9 +17,9 @@ type PostType = {
 
 // POST STATE
 const initialPostState: PostType = {
-  postId: 0,
-  postTitle: "",
-  postBody: "",
+  id: 0,
+  title: "",
+  body: "",
   comments: [
     {
       id: 0,
@@ -50,13 +50,7 @@ type AllPostsType = {
 
 // ALL POSTS STATE
 const initialAllPostsState: AllPostsType = {
-  allPosts: [
-    {
-      postId: 0,
-      postTitle: "",
-      postBody: ""
-    }
-  ],
+  allPosts: [],
   isLoaded: false
 };
 
@@ -65,11 +59,12 @@ const allPostsReducer = (
   state = initialAllPostsState,
   action
 ): AllPostsType => {
+  // debugger
   switch (action.type) {
     case type.SET_POST:
       return {
         ...state,
-        allPosts: [...action.posts]
+        allPosts: [...action.posts.reverse()]
       };
     case type.SET_POST_LOADED:
       return {
