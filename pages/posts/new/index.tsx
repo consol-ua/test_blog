@@ -1,10 +1,11 @@
 import React from "react";
+import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import Head from "next/head";
 import LayOutApp from "../../../components/LayOutApp";
 import { addTitlePost, addBodyPost, sendPost } from "../../../store/actions";
 
 export default function NewPost() {
+  let router = useRouter();
   const dispatch = useDispatch();
   const state = useSelector((state) => state.createPost);
   let onChangeTitle = (event) => {
@@ -16,7 +17,8 @@ export default function NewPost() {
     dispatch(addBodyPost(value));
   };
   let onClickSend = () => {
-    dispatch(sendPost());
+    dispatch(sendPost(state.title, state.body));
+    router.push("/");
   };
   return (
     <LayOutApp>

@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   ADD_BODY_COMMENT,
   ADD_TITLE_COMMENT,
@@ -26,11 +27,33 @@ export const addBodyPost = (bodyPost: string) => ({
   bodyPost
 });
 
-export const sendPost = () => (dispatch) => {
-  console.log("send");
-  setTimeout(() => {
-    dispatch({ type: SEND_POST });
-  }, 1000);
+export const sendPost = (title, body) => (dispatch) => {
+  // try {
+  //   const response = axios.post("https://simple-blog-api.crew.red/posts", {
+  //     title,
+  //     body
+  //   });
+  //   console.log("👉 Returned data:", response);
+  // } catch (e) {
+  //   console.log(`😱 Axios request failed: ${e}`);
+  // }
+  let postBody = {
+    title: title,
+    body: body
+  };
+  axios
+    .post("https://simple-blog-api.crew.red/posts/", postBody)
+    .then(function (response) {
+      if (response.status < 300) {
+        console.log("OK");
+        dispatch({ type: SEND_POST });
+      }
+    })
+    .catch(function (error) {
+      if (error.response.status > 399) {
+        console.log("ERROR API");
+      }
+    });
 };
 
 // // POST Create a comment
