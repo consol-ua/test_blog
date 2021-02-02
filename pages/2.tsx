@@ -4,14 +4,13 @@ import { useSelector } from "react-redux";
 import LayOutApp from "../components/LayOutApp";
 import styles from "../styles/Lastpost.module.css";
 
-
 const codeStyle = {
-  background: '#ebebeb',
+  background: "#ebebeb",
   width: 400,
   padding: 10,
-  border: '1px solid grey',
-  marginBottom: 10,
-}
+  border: "1px solid grey",
+  marginBottom: 10
+};
 export default function Home() {
   // return (
   //   <>
@@ -19,7 +18,7 @@ export default function Home() {
   //     <h1>Test link 2</h1>
   //   </>
   // );
-  const state = useSelector((state) => state)
+  const state = useSelector((state) => state);
 
   return (
     <LayOutApp>
@@ -29,6 +28,6 @@ export default function Home() {
       <Link href="/">
         <a>Go Back Home</a>
       </Link>
-    <LayOutApp/>
-  )
+    </LayOutApp>
+  );
 }
