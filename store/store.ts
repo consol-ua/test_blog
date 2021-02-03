@@ -12,6 +12,7 @@ function initStore(initialState) {
     applyMiddleware(thunkMiddleware)
   )
 }
+export type GlogalStoreType = ReturnType<typeof initStore>
 
 export const initializeStore = (preloadedState) => {
   let _store = store ?? initStore(preloadedState)

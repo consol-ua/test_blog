@@ -11,11 +11,11 @@ export default function NewPost() {
   let router = useRouter();
   const dispatch = useDispatch();
   const state = useSelector((state: GlobalStateType) => state.createPost);
-  let onChangeTitle = (event) => {
+  let onChangeTitle = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     let value = event.target.value;
     dispatch(addTitlePost(value));
   };
-  let onChangeBody = (event) => {
+  let onChangeBody = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     let value = event.target.value;
     dispatch(addBodyPost(value));
   };

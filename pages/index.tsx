@@ -4,14 +4,14 @@ import axios from "axios";
 import LayOutApp from "../components/LayOutApp";
 import s from "../styles/allpost.module.css";
 import { setPost } from "../store/actions";
-import { GlobalStateType } from "../store/reducers";
+import { GlobalStateType, PostType } from "../store/reducers";
 import { Post } from "../components/Post";
 import Preloader from "../components/preloder/Preloader";
 
 function AllPosts({ posts }) {
   const dispatch = useDispatch();
   const stateComponent = useSelector((state: GlobalStateType) => state.allPost);
-  let allPosts = posts ?? stateComponent.allPosts;
+  let allPosts: Array<PostType> = posts ?? stateComponent.allPosts;
   if (!allPosts.length && !stateComponent.isLoaded) {
     dispatch(setPost());
   }

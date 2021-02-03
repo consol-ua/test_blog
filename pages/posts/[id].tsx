@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import LayOutApp from "../../components/LayOutApp";
 import Preloader from "../../components/preloder/Preloader";
@@ -22,7 +22,7 @@ export default function OnePost() {
     dispatch(getPost(id));
     // }
   }, [dispatch])
-  let onChangeBody = (event) => {
+  let onChangeBody = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     let value = event.target.value;
     dispatch(addBodyComment(value));
   };
