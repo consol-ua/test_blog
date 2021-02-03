@@ -11,7 +11,10 @@ import Preloader from "../components/preloder/Preloader";
 function AllPosts({ posts }) {
   const dispatch = useDispatch();
   const stateComponent = useSelector((state: GlobalStateType) => state.allPost);
-  let allPosts: Array<PostType> = posts ?? stateComponent.allPosts;
+  let allPosts: Array<PostType>
+  if (!posts || posts.length !== stateComponent.allPosts.length) {
+    allPosts = stateComponent.allPosts;
+  } else { allPosts = posts }
   if (!allPosts.length && !stateComponent.isLoaded) {
     dispatch(setPost());
   }
