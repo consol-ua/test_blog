@@ -13,17 +13,19 @@ export function Post({ title, body, id }) {
   }
   return (
     <div className={s.container}>
-      <div className={s.img} onClick={onClickPost}>
-        <Image
-          src="/blog.webp"
-          alt="Default photo"
-          width={600}
-          height={300}
-        />
-      </div>
-      <div className={s.post}>
-        <h2 className={s.title}>{title}</h2>
-        <p className={s.body}>{body}</p>
+      <div className={s.postItem}>
+        <div className={s.img} onClick={onClickPost}>
+          <Image
+            src="/blog.webp"
+            alt="Default photo"
+            width={600}
+            height={300}
+          />
+        </div>
+        <div className={s.post}>
+          <h2 className={s.title}>{title}</h2>
+          <p className={s.body}>{body}</p>
+        </div>
       </div>
       <button onClick={() => dispatch(delPost(id))} className={s.deletPost}>X</button>
     </div>

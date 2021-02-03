@@ -21,7 +21,7 @@ export const addBodyPost = (bodyPost: string) => ({
   bodyPost
 });
 export const isSendPos = (isPosted) => ({
-  type: type.SET_POST_LOADED,
+  type: type.SEND_POSTED,
   isPosted
 });
 export const redirected = (redirect) => ({

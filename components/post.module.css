@@ -1,14 +1,32 @@
 .container {
-  margin: 20px;
+  margin: 10px;
+  position: relative;
+}
+.container:nth-child(n){
+  flex: 1 1 30%;
+}
+.container:nth-child(1){
+  flex: 1 1 100%;
+}
+.container:nth-child(3n+5){
+  flex: 1 1 100%;
+}
+
+
+.postItem{
   display: flex;
   padding: 10px;
   flex-wrap: wrap;
   justify-content: space-between;
-  position: relative;
   border: 1px solid rgb(200, 200, 200);
+  box-shadow: 0 0 10px rgb(200, 200, 200);
+  cursor: pointer;
+}
+.postItem:hover{
+  box-shadow: 0 0 10px rgb(170, 170, 170);
 }
 .img {
-  flex: 1 1 50%;
+  flex: 1 1 40%;
   padding: 10px;
   cursor: pointer;
 }
@@ -24,4 +42,7 @@
   position: absolute;
   right: 0;
   top: 0;
+}
+.deletPost:hover{
+  box-shadow: 0 0 5px red;
 }

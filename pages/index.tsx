@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import LayOutApp from "../components/LayOutApp";
-import styles from "../styles/post.module.css";
+import s from "../styles/post.module.css";
 import { setPost } from "../store/actions";
 import { GlobalStateType } from "../store/reducers";
 import { Post } from "../components/Post";
@@ -25,14 +25,16 @@ function AllPosts({ posts }) {
   }
   return (
     <LayOutApp>
-      {
-        allPosts.map((el) => {
-          return <Post key={el.id}
-            id={el.id}
-            title={!el.title ? 'net title' : el.title}
-            body={!el.body ? 'net body' : el.body} />
-        })
-      }
+      <div className={s.container}>
+        {
+          allPosts.map((el) => {
+            return <Post key={el.id}
+              id={el.id}
+              title={!el.title ? 'net title' : el.title}
+              body={!el.body ? 'net body' : el.body} />
+          })
+        }
+      </div>
     </LayOutApp>
   );
 }
