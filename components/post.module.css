@@ -4,11 +4,13 @@
   padding: 10px;
   flex-wrap: wrap;
   justify-content: space-between;
+  position: relative;
+  border: 1px solid rgb(200, 200, 200);
 }
 .img {
   flex: 1 1 50%;
-  min-width: 400px;
-  padding: 10px
+  padding: 10px;
+  cursor: pointer;
 }
 .post {
   flex: 1 0 50%;
@@ -17,4 +19,9 @@
 }
 .title {
   margin: 0;
+}
+.deletPost {
+  position: absolute;
+  right: 0;
+  top: 0;
 }

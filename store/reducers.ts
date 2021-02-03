@@ -59,7 +59,6 @@ const allPostsReducer = (
   state = initialAllPostsState,
   action
 ): AllPostsType => {
-  // debugger
   switch (action.type) {
     case type.SET_POST:
       return {
@@ -80,7 +79,8 @@ const allPostsReducer = (
 const initialCreatePostState = {
   title: "Test title",
   body: "Test Body",
-  isPosted: false
+  isPosted: false,
+  redirect: false
 };
 
 type CreatePostType = typeof initialCreatePostState;
@@ -96,6 +96,10 @@ const createPostReducer = (
       return { ...state, body: action.bodyPost };
     case type.SEND_POST:
       return { ...state, body: "", title: "" };
+    case type.SEND_POSTED:
+      return { ...state, isPosted: action.isPosted };
+    case type.REDIRECT:
+      return { ...state, redirect: action.redirect };
     default:
       return state;
   }

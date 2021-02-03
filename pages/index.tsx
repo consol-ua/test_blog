@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -21,9 +20,7 @@ function AllPosts({ posts }) {
       dispatch(setPost());
     }
   }, [dispatch])
-  console.log(stateComponent.isLoaded)
   if (stateComponent.isLoaded) {
-    console.log('preloder')
     return <LayOutApp><Preloader /></LayOutApp>
   }
   return (

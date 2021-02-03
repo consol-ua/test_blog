@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import LayOutApp from "../../../components/LayOutApp";
-import { addTitlePost, addBodyPost, sendPost } from "../../../store/actions";
+import { addTitlePost, addBodyPost, sendPost, redirected } from "../../../store/actions";
 import { GlobalStateType } from "../../../store/reducers";
 
 export default function NewPost() {
@@ -17,9 +17,13 @@ export default function NewPost() {
     let value = event.target.value;
     dispatch(addBodyPost(value));
   };
+  if (state.redirect) {
+    router.push("/");
+    dispatch(redirected(false))
+  }
   let onClickSend = () => {
     dispatch(sendPost(state.title, state.body));
-    router.push("/");
+
   };
   return (
     <LayOutApp>
@@ -42,7 +46,8 @@ export default function NewPost() {
             value={state.body ?? ""}
           />
         </div>
-        <button onClick={() => onClickSend()}>Send post</button>
+        {state.isPosted ? <button disabled onClick={() => onClickSend()}>Send post</button> :
+          <button onClick={() => onClickSend()}>Send post</button>}
       </div>
       <style jsx>{`
         .container {
