@@ -11,16 +11,17 @@ import Preloader from "../components/preloder/Preloader";
 function AllPosts({ posts }) {
   const dispatch = useDispatch();
   const stateComponent = useSelector((state: GlobalStateType) => state.allPost);
-  let allPosts: Array<PostType>
-  if (!posts || posts.length !== stateComponent.allPosts.length) {
-    allPosts = stateComponent.allPosts;
-  } else { allPosts = posts }
+  let allPosts: Array<PostType> = posts ?? stateComponent.allPosts
+
   if (!allPosts.length && !stateComponent.isLoaded) {
     dispatch(setPost());
   }
   useEffect(() => {
     if (!posts && !stateComponent.isLoaded) {
       dispatch(setPost());
+    }
+    if (stateComponent.allPosts) {
+      allPosts = stateComponent.allPosts
     }
   }, [dispatch])
 

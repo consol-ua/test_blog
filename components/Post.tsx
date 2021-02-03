@@ -11,6 +11,10 @@ export function Post({ title, body, id }) {
   function onClickPost() {
     router.push(`/posts/${id}`)
   }
+  function onClickDel(postId) {
+    dispatch(delPost(postId))
+    router.push(`/`)
+  }
   return (
     <div className={s.container}>
       <div className={s.postItem} onClick={onClickPost}>
@@ -27,7 +31,7 @@ export function Post({ title, body, id }) {
           <p className={s.body}>{body}</p>
         </div>
       </div>
-      <button onClick={() => dispatch(delPost(id))} className={s.deletPost}>X</button>
+      <button onClick={() => onClickDel(id)} className={s.deletPost}>X</button>
     </div>
   )
 }
