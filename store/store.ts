@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import reducers, { GlobalStateType } from './reducers'
+import reducers from './reducers'
 
 let store
 
-function initStore(initialState: GlobalStateType) {
+function initStore(initialState) {
   return createStore(
     reducers,
     initialState,

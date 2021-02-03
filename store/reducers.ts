@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { ActionsType } from "./actions";
 import * as type from "./type";
 
 type CommentType = {
@@ -6,13 +7,13 @@ type CommentType = {
   postId: number;
   body: string;
 };
-type PostType = {
+export type PostType = {
   id: number
   title: string
   body: string
   comments?: Array<CommentType>
   newBodyComment?: string
-  isGetPost: boolean
+  isGetPost?: boolean
 };
 
 // POST STATE
@@ -32,7 +33,7 @@ const initialPostState: PostType = {
 };
 
 // POST REDUCER
-const postReducer = (state = initialPostState, action): PostType => {
+const postReducer = (state = initialPostState, action: ActionsType): PostType => {
   switch (action.type) {
     case type.GET_POST:
       return { ...state, ...action.data, comments: [...action.data.comments] };
@@ -61,7 +62,7 @@ const initialAllPostsState: AllPostsType = {
 // ALL POSTS REDUCER
 const allPostsReducer = (
   state = initialAllPostsState,
-  action
+  action: ActionsType
 ): AllPostsType => {
   switch (action.type) {
     case type.SET_POST:
@@ -91,7 +92,7 @@ type CreatePostType = typeof initialCreatePostState;
 // CREATE POST REDUCER
 const createPostReducer = (
   state = initialCreatePostState,
-  action
+  action: ActionsType
 ): CreatePostType => {
   switch (action.type) {
     case type.ADD_TITLE_POST:

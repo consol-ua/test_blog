@@ -1,13 +1,13 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { GlobalStateType, AllPostsType } from "./reducers";
+import { GlobalStateType, PostType } from "./reducers";
 import * as type from "./type";
 export type ActionsType = SetPostType | SendPostType | AddBodyCommentType | AddTitlePostType | AddBodyPostType | IsSendPosType | RedirectedType | IsLoadedPosType | IsGetPostType | SendBodyCommentType | GetPostType
 
 type AddBodyCommentType = { type: typeof type.ADD_BODY_COMMENT, bodyComment: string }
 export const addBodyComment = (bodyComment: string): AddBodyCommentType => ({
   type: type.ADD_BODY_COMMENT,
-  bodyComment
+  bodyComment: bodyComment
 });
 type SendBodyCommentType = {
   type: typeof type.SEND_BODY_COMMENT
@@ -40,6 +40,7 @@ export const addTitlePost = (titlePost: string): AddTitlePostType => ({
   titlePost
 });
 type AddBodyPostType = { type: typeof type.ADD_BODY_POST, bodyPost: string }
+
 export const addBodyPost = (bodyPost: string): AddBodyPostType => ({
   type: type.ADD_BODY_POST,
   bodyPost
@@ -83,7 +84,7 @@ export const isLoadedPos = (isLoaded: boolean): IsLoadedPosType => ({
   isLoaded
 });
 
-type SetPostType = { type: typeof type.SET_POST, posts: AllPostsType }
+type SetPostType = { type: typeof type.SET_POST, posts: Array<PostType> }
 export const setPost = () => (dispatch: Dispatch<ActionsType>, getState: () => GlobalStateType) => {
   dispatch(isLoadedPos(true));
   axios
