@@ -1,15 +1,33 @@
 import axios from "axios";
 import * as type from "./type";
 
-export const addTitleComment = (titleComment: string) => ({
-  type: type.ADD_TITLE_COMMENT,
-  titleComment
-});
 
 export const addBodyComment = (bodyComment: string) => ({
   type: type.ADD_BODY_COMMENT,
   bodyComment
 });
+
+export const sendComment = (postId: number, body: string) => (dispatch) => {
+  dispatch(isGetPost(true))
+  axios
+    .post("https://simple-blog-api.crew.red/comments", {
+      postId: postId,
+      body: body
+    })
+    .then((response) => {
+      if (response.status < 300) {
+        console.log("OK");
+        dispatch({ type: type.SEND_BODY_COMMENT });
+        dispatch(isGetPost(false));
+        dispatch(getPost(postId))
+      }
+    })
+    .catch((error) => {
+      if (error.response.status > 399) {
+        console.log("ERROR SEND COMMENT API");
+      }
+    });
+};
 
 export const addTitlePost = (titlePost: string) => ({
   type: type.ADD_TITLE_POST,
@@ -75,6 +93,23 @@ export const delPost = (id) => (dispatch) => {
       dispatch(setPost());
     })
     .catch((error) => {
-      console.log("ERROR SET POST API");
+      console.log("ERROR DEL POST API");
+    });
+};
+
+export const isGetPost = (isGetPost) => ({
+  type: type.IS_GET_POST,
+  isGetPost
+});
+export const getPost = (id) => (dispatch) => {
+  dispatch(isGetPost(true));
+  axios
+    .get(`https://simple-blog-api.crew.red/posts/${id}?_embed=comments`)
+    .then((res) => {
+      dispatch({ type: type.GET_POST, data: res.data });
+      dispatch(isGetPost(false));
+    })
+    .catch((error) => {
+      console.log("ERROR GET POST API");
     });
 };

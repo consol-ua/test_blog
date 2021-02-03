@@ -5,15 +5,13 @@
 .container:nth-child(n){
   flex: 1 1 30%;
 }
-.container:nth-child(1){
-  flex: 1 1 100%;
-}
-.container:nth-child(3n+5){
-  flex: 1 1 100%;
-}
 
+.container:nth-child(6n+1){
+  flex: 1 1 100%;
+}
 
 .postItem{
+  height: 100%;
   display: flex;
   padding: 10px;
   flex-wrap: wrap;

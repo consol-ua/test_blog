@@ -1,21 +1,27 @@
 .navigation {
   display: flex;
   justify-content: space-around;
+  position: fixed;
+  top: 0;
+  right: 10%;
+  z-index: 9;
 }
 .navigation a {
   display: block;
   padding: 20px;
   flex: 1 0 30%;
   text-align: center;
-  background: rgb(213, 213, 213);
+  background: rgba(213, 213, 213, 0.5);
+  border-radius: 20px;
+  font-weight: 600;
 }
 .navigation a:hover {
-  background: rgb(201, 201, 201);
+  background: rgba(201, 201, 201,  0.7);
 }
 .navigation a.active {
-  background: rgb(182, 182, 182);
+  background: rgba(182, 182, 182,  0.9);
 }
 .container {
-  max-width: 1200px;
+  max-width: 2000px;
   margin: 0 auto;
 }

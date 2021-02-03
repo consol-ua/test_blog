@@ -13,8 +13,8 @@ export function Post({ title, body, id }) {
   }
   return (
     <div className={s.container}>
-      <div className={s.postItem}>
-        <div className={s.img} onClick={onClickPost}>
+      <div className={s.postItem} onClick={onClickPost}>
+        <div className={s.img}>
           <Image
             src="/blog.webp"
             alt="Default photo"

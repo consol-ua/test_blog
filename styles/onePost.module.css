@@ -1,0 +1,43 @@
+.mainPost {
+  padding: 20px;
+}
+.post {
+  border-bottom: 1px solid rgb(200, 200, 200);
+}
+.commentsContainer{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  
+  }
+
+.commentsContainer span{
+  font-style: italic;
+  font-weight: 600;
+}
+
+.comment {
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: rgb(200, 200, 200);
+  border-radius: 10px;
+  color: rgb(100, 100, 100) ;
+}
+.newComment {
+  border-top: 1px dotted rgb(200, 200, 200);
+  margin-top: 20px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.newComment textarea {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.buttonContainer {
+  margin-top: 20px;
+}
+.buttonContainer button {
+  margin: 10px;
+  padding: 10px;
+}

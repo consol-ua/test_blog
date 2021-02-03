@@ -7,12 +7,12 @@ type CommentType = {
   body: string;
 };
 type PostType = {
-  id: number;
-  title: string;
-  body: string;
-  comments?: Array<CommentType>;
-  newTitleComment?: string;
-  newBodyComment?: string;
+  id: number
+  title: string
+  body: string
+  comments?: Array<CommentType>
+  newBodyComment?: string
+  isGetPost: boolean
 };
 
 // POST STATE
@@ -28,16 +28,20 @@ const initialPostState: PostType = {
     }
   ],
   newBodyComment: "",
-  newTitleComment: ""
+  isGetPost: false
 };
 
 // POST REDUCER
 const postReducer = (state = initialPostState, action): PostType => {
   switch (action.type) {
-    // case type.ADD_TITLE_COMMENT:
-    //   return { ...state, newTitleComment: action.titleComment };
-    // case type.ADD_BODY_COMMENT:
-    //   return { ...state, newBodyComment: action.bodyComment };
+    case type.GET_POST:
+      return { ...state, ...action.data, comments: [...action.data.comments] };
+    case type.IS_GET_POST:
+      return { ...state, isGetPost: action.isGetPost };
+    case type.ADD_BODY_COMMENT:
+      return { ...state, newBodyComment: action.bodyComment };
+    case type.SEND_BODY_COMMENT:
+      return { ...state, newBodyComment: '' }
     default:
       return state;
   }

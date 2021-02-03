@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import LayOutApp from "../components/LayOutApp";
-import s from "../styles/post.module.css";
+import s from "../styles/allpost.module.css";
 import { setPost } from "../store/actions";
 import { GlobalStateType } from "../store/reducers";
 import { Post } from "../components/Post";
@@ -20,11 +20,10 @@ function AllPosts({ posts }) {
       dispatch(setPost());
     }
   }, [dispatch])
-  if (stateComponent.isLoaded) {
-    return <LayOutApp><Preloader /></LayOutApp>
-  }
+
   return (
     <LayOutApp>
+      {stateComponent.isLoaded && <Preloader />}
       <div className={s.container}>
         {
           allPosts.map((el) => {
