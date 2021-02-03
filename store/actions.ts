@@ -1,12 +1,17 @@
 import axios from "axios";
+import { Dispatch } from "redux";
+import { GlobalStateType, AllPostsType } from "./reducers";
 import * as type from "./type";
+export type ActionsType = SetPostType | SendPostType | AddBodyCommentType | AddTitlePostType | AddBodyPostType | IsSendPosType | RedirectedType | IsLoadedPosType | IsGetPostType | SendBodyCommentType | GetPostType
 
-
-export const addBodyComment = (bodyComment: string) => ({
+type AddBodyCommentType = { type: typeof type.ADD_BODY_COMMENT, bodyComment: string }
+export const addBodyComment = (bodyComment: string): AddBodyCommentType => ({
   type: type.ADD_BODY_COMMENT,
   bodyComment
 });
-
+type SendBodyCommentType = {
+  type: typeof type.SEND_BODY_COMMENT
+}
 export const sendComment = (postId: number, body: string) => (dispatch) => {
   dispatch(isGetPost(true))
   axios
@@ -19,7 +24,7 @@ export const sendComment = (postId: number, body: string) => (dispatch) => {
         console.log("OK");
         dispatch({ type: type.SEND_BODY_COMMENT });
         dispatch(isGetPost(false));
-        dispatch(getPost(postId))
+        dispatch(getPost(postId.toString()))
       }
     })
     .catch((error) => {
@@ -29,25 +34,29 @@ export const sendComment = (postId: number, body: string) => (dispatch) => {
     });
 };
 
-export const addTitlePost = (titlePost: string) => ({
+type AddTitlePostType = { type: typeof type.ADD_TITLE_POST, titlePost: string }
+export const addTitlePost = (titlePost: string): AddTitlePostType => ({
   type: type.ADD_TITLE_POST,
   titlePost
 });
-
-export const addBodyPost = (bodyPost: string) => ({
+type AddBodyPostType = { type: typeof type.ADD_BODY_POST, bodyPost: string }
+export const addBodyPost = (bodyPost: string): AddBodyPostType => ({
   type: type.ADD_BODY_POST,
   bodyPost
 });
-export const isSendPos = (isPosted) => ({
+type IsSendPosType = { type: typeof type.SEND_POSTED, isPosted: boolean }
+export const isSendPos = (isPosted: boolean): IsSendPosType => ({
   type: type.SEND_POSTED,
   isPosted
 });
-export const redirected = (redirect) => ({
+type RedirectedType = { type: typeof type.REDIRECT, redirect: boolean }
+export const redirected = (redirect: boolean): RedirectedType => ({
   type: type.REDIRECT,
   redirect
 });
+type SendPostType = { type: typeof type.SEND_POST }
 
-export const sendPost = (title, body) => (dispatch) => {
+export const sendPost = (title: string, body: string) => (dispatch: Dispatch<ActionsType>, getState: () => GlobalStateType) => {
   dispatch(isSendPos(true))
   axios
     .post("https://simple-blog-api.crew.red/posts/", {
@@ -68,12 +77,14 @@ export const sendPost = (title, body) => (dispatch) => {
       }
     });
 };
-
-export const isLoadedPos = (isLoaded) => ({
+type IsLoadedPosType = { type: typeof type.SET_POST_LOADED, isLoaded: boolean }
+export const isLoadedPos = (isLoaded: boolean): IsLoadedPosType => ({
   type: type.SET_POST_LOADED,
   isLoaded
 });
-export const setPost = () => (dispatch) => {
+
+type SetPostType = { type: typeof type.SET_POST, posts: AllPostsType }
+export const setPost = () => (dispatch: Dispatch<ActionsType>, getState: () => GlobalStateType) => {
   dispatch(isLoadedPos(true));
   axios
     .get("https://simple-blog-api.crew.red/posts/")
@@ -85,7 +96,7 @@ export const setPost = () => (dispatch) => {
       console.log("ERROR SET POST API");
     });
 };
-export const delPost = (id) => (dispatch) => {
+export const delPost = (id: string) => (dispatch) => {
   dispatch(isLoadedPos(true));
   axios
     .delete(`https://simple-blog-api.crew.red/posts/${id}`)
@@ -96,12 +107,13 @@ export const delPost = (id) => (dispatch) => {
       console.log("ERROR DEL POST API");
     });
 };
-
-export const isGetPost = (isGetPost) => ({
+type IsGetPostType = { type: typeof type.IS_GET_POST, isGetPost: boolean }
+export const isGetPost = (isGetPost: boolean): IsGetPostType => ({
   type: type.IS_GET_POST,
   isGetPost
 });
-export const getPost = (id) => (dispatch) => {
+type GetPostType = { type: typeof type.GET_POST, data: any }
+export const getPost = (id: string | string[]) => (dispatch: Dispatch<ActionsType>, getState: () => GlobalStateType) => {
   dispatch(isGetPost(true));
   axios
     .get(`https://simple-blog-api.crew.red/posts/${id}?_embed=comments`)

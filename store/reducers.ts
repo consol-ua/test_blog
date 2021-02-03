@@ -47,7 +47,7 @@ const postReducer = (state = initialPostState, action): PostType => {
   }
 };
 
-type AllPostsType = {
+export type AllPostsType = {
   allPosts: Array<PostType>;
   isLoaded: boolean;
 };
