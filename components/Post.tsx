@@ -4,15 +4,19 @@ import Image from 'next/image'
 import s from './post.module.css'
 import { delPost } from "../store/actions"
 
-
-export function Post({ title, body, id }) {
+type PostComponentType = {
+  title: string
+  body: string
+  id: number
+}
+export function Post({ title, body, id }: PostComponentType) {
   let router = useRouter()
   let dispatch = useDispatch()
   function onClickPost() {
     router.push(`/posts/${id}`)
   }
-  function onClickDel(postId) {
-    dispatch(delPost(postId))
+  function onClickDel() {
+    dispatch(delPost(id))
     router.push(`/`)
   }
   return (
@@ -31,7 +35,7 @@ export function Post({ title, body, id }) {
           <p className={s.body}>{body}</p>
         </div>
       </div>
-      <button onClick={() => onClickDel(id)} className={s.deletPost}>X</button>
+      <button onClick={onClickDel} className={s.deletPost}>X</button>
     </div>
   )
 }

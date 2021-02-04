@@ -97,7 +97,7 @@ export const setPost = () => (dispatch: Dispatch<ActionsType>, getState: () => G
       console.log("ERROR SET POST API");
     });
 };
-export const delPost = (id: string) => (dispatch) => {
+export const delPost = (id: number) => (dispatch) => {
   dispatch(isLoadedPos(true));
   axios
     .delete(`https://simple-blog-api.crew.red/posts/${id}`)

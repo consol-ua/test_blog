@@ -8,10 +8,14 @@ import { GlobalStateType, PostType } from "../store/reducers";
 import { Post } from "../components/Post";
 import Preloader from "../components/preloder/Preloader";
 
-function AllPosts({ posts }) {
+type AllPostsPropstype = {
+  posts: Array<PostType>
+}
+
+function AllPosts({ posts }: AllPostsPropstype) {
   const dispatch = useDispatch();
   const stateComponent = useSelector((state: GlobalStateType) => state.allPost);
-  let allPosts: Array<PostType> = posts ?? stateComponent.allPosts
+  let allPosts = posts ?? stateComponent.allPosts
 
   if (!allPosts.length && !stateComponent.isLoaded) {
     dispatch(setPost());
